@@ -30,36 +30,38 @@ namespace LINQ_Practice
         [TestMethod]
         public void DoAllCohortsHaveTwoOrMoreJuniorInstructors()
         {
-            var doAll = PracticeData/*FILL IN LINQ EXPRESSION*/;
-            Assert.IsTrue(false); //<-- change false to doAll
+            bool doAll = PracticeData.All(c => c.JuniorInstructors.Count() >= 2)/*FILL IN LINQ EXPRESSION*/;
+            Assert.IsTrue(doAll); //<-- change false to doAll
         }
 
         [TestMethod]
-        public void DoAllCohortsFiveStudents()
+        public void DoAllCohortsHaveFiveOrMoreStudents()
         {
-            var doAll = PracticeData/*FILL IN LINQ EXPRESSION*/;
-            Assert.IsTrue(false); //<-- change false to doAll
+            bool doAll = PracticeData.All(c => c.Students.Count() >= 5)/*FILL IN LINQ EXPRESSION*/;
+            Assert.IsTrue(doAll); //<-- change false to doAll
         }
 
         [TestMethod]
         public void DoAllCohortsHavePrimaryInstructorsBornIn1980s()
         {
-            var doAll = PracticeData/*FILL IN LINQ EXPRESSION*/;
-            Assert.IsFalse(true); //<-- change true to doAll
+            var doAll = PracticeData.All(i => i.PrimaryInstructor.Birthday.Year > 1979 && i.PrimaryInstructor.Birthday.Year < 1990 )/*FILL IN LINQ EXPRESSION*/;
+            Assert.IsFalse(doAll); //<-- change true to doAll
         }
 
         [TestMethod]
         public void DoAllCohortsHaveActivePrimaryInstructors()
         {
-            var doAll = PracticeData/*FILL IN LINQ EXPRESSION*/;
-            Assert.IsTrue(true); //<-- change true to doAll
+            var doAll = PracticeData.All(i => i.PrimaryInstructor.Active == true )/*FILL IN LINQ EXPRESSION*/;
+            Assert.IsTrue(doAll); //<-- change true to doAll
         }
 
         [TestMethod]
         public void DoAllStudentsInCohort1HaveFirstNamesThatContainTheLetterE()
         {
-            var doAll = PracticeData/*FILL IN LINQ EXPRESSION*/; //Hint: Cohort1 would be PracticeData[0]
-            Assert.IsTrue(false); //<-- change false to doAll
+            var cohort1 = PracticeData.First(c => c.Name == "Evening Five");
+            var doAll = cohort1.Students.All(s => s.FirstName.Contains("e"))
+                /*FILL IN LINQ EXPRESSION*/; //Hint: Cohort1 would be PracticeData[0]
+            Assert.IsTrue(doAll); //<-- change false to doAll
         }
 
         [TestMethod]

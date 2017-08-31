@@ -16,7 +16,8 @@ namespace LINQ_Practice
         * and returns the first occurance of an item that matches the condition if there is one
         * And .FirstOrDefault()
         * which returns null if there is not an item that matches condition
-        * but still returns the first occurance of an item that matched the condition if there is one
+        * but still returns the first occurance of an item that matched the condition if there 
+        * is one
        */
         public List<Cohort> PracticeData { get; set; }
         public CohortBuilder CohortBuilder { get; set; }
@@ -38,7 +39,7 @@ namespace LINQ_Practice
         [TestMethod]
         public void GetFirstCohortWherePrimaryInstructorIsKate()
         {
-            var ActualCohort = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var ActualCohort = PracticeData.First(c => c.PrimaryInstructor.FirstName == "Kate")/*FILL IN LINQ EXPRESSION*/;
             Assert.AreEqual(ActualCohort, CohortBuilder.Cohort4);
         }
 
@@ -46,14 +47,14 @@ namespace LINQ_Practice
         [TestMethod]
         public void GetFirstCohortWithThreeJuniorInstructors()
         {
-            var ActualCohort = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var ActualCohort = PracticeData.First(c => c.JuniorInstructors.Count() == 3)/*FILL IN LINQ EXPRESSION*/;
             Assert.AreEqual(ActualCohort, CohortBuilder.Cohort3);
         }
 
         [TestMethod]
         public void GetFirstCohortThatIsFullTimeAndPrimaryInstructorBirthdayInTheFuture()
         {
-            var ActualCohort = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var ActualCohort = PracticeData.First(c => c.FullTime = true && c.PrimaryInstructor.Birthday.Year > 2017)/*FILL IN LINQ EXPRESSION*/;
             Assert.AreEqual(ActualCohort, CohortBuilder.Cohort2);
         }
 

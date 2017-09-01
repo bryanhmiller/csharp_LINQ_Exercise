@@ -61,21 +61,34 @@ namespace LINQ_Practice
         [TestMethod]
         public void GetFirstCohortWithInstructorNamedZeldaOrNull()
         {
-            var ActualCohort = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var cohort1 = PracticeData.First(c => c.Name == "Evening Five");
+            var cohort2 = PracticeData.First(c => c.Name == "Cohort of the Future");
+            var cohort3 = PracticeData.First(c => c.Name == "Evening Ninja Warriors");
+            var cohort4 = PracticeData.First(c => c.Name == "Day Backgammon Geeks");
+            var ActualCohort1 = cohort1.JuniorInstructors.FirstOrDefault(i => i.FirstName == "Zelda");
+            var ActualCohort2 = cohort2.JuniorInstructors.FirstOrDefault(i => i.FirstName == "Zelda");
+            var ActualCohort3 = cohort3.JuniorInstructors.FirstOrDefault(i => i.FirstName == "Zelda");
+            var ActualCohort4 = cohort4.JuniorInstructors.FirstOrDefault(i => i.FirstName == "Zelda");
+            var ActualCohort = PracticeData.FirstOrDefault(c => c.PrimaryInstructor.FirstName == "Zelda")/*FILL IN LINQ EXPRESSION*/;
             Assert.IsNull(ActualCohort);
+            Assert.IsNull(ActualCohort1);
+            Assert.IsNull(ActualCohort2);
+            Assert.IsNull(ActualCohort3);
+            Assert.IsNull(ActualCohort4);
+
         }
 
         [TestMethod]
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetFirstCohortThatIsBothNotActiveAndNotFullTimeOrThrowException()
         {
-            var shouldThrowException = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var shouldThrowException = PracticeData.First(c => c.Active == false && c.FullTime == false)/*FILL IN LINQ EXPRESSION*/;
         }
 
         [TestMethod]
         public void GetFirstCohortWith2JuniorInstructors()
         {
-            var ActualCohort = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var ActualCohort = PracticeData.First(c => c.JuniorInstructors.Count() == 2)/*FILL IN LINQ EXPRESSION*/;
             Assert.AreEqual(ActualCohort, CohortBuilder.Cohort1);
         }
 

@@ -63,21 +63,21 @@ namespace LINQ_Practice
         [TestMethod]
         public void GetOldestStudent()
         {
-            var student = PracticeData/*.Where(c => c.Students.Min(s => s.Birthday)) FILL IN LINQ EXPRESSION*/;
+            var student = PracticeData.SelectMany(c => c.Students).OrderBy(s => s.Birthday).First(); 
             Assert.AreEqual(student, CohortBuilder.Student18);
         }
 
         [TestMethod]
         public void GetYoungestStudent()
         {
-            var student = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var student = PracticeData.SelectMany(c => c.Students).OrderByDescending(s => s.Birthday).First();
             Assert.AreEqual(student, CohortBuilder.Student3);
         }
 
         [TestMethod]
         public void GetAllInactiveStudentsByLastName()
         {
-            var ActualStudents = PracticeData.Where(c => c.Students.All(s => s.Active == false))/*FILL IN LINQ EXPRESSION*/.ToList();
+            var ActualStudents = PracticeData.SelectMany(c => c.Students).Where(s => s.Active == false).OrderBy(s => s.LastName)/*FILL IN LINQ EXPRESSION*/.ToList();
             CollectionAssert.AreEqual(ActualStudents, new List<Student> { CohortBuilder.Student2, CohortBuilder.Student11, CohortBuilder.Student12, CohortBuilder.Student17 });
         }
     }
